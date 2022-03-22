@@ -35,7 +35,8 @@ public class Oferta {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Usuario usuario;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.JOIN)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Pedido pedido;
 	
 	@Enumerated(EnumType.STRING)

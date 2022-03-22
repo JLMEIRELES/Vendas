@@ -51,7 +51,7 @@ public class HomeController {
 	public String status(@PathVariable("status") String status, Model model, Principal principal) {
 		
 		Sort sort = Sort.by("id");
-		PageRequest  pagina = PageRequest.of(0, 5, sort);
+		PageRequest  pagina = PageRequest.of(0, 0, sort);
 		List<Pedido> pedidos = pedidoRepository.findByStatusAndUser(status.toUpperCase(), principal.getName());
 
 		model.addAttribute("pedidos", pedidos);

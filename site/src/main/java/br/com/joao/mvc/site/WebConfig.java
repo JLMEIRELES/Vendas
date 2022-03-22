@@ -12,6 +12,5 @@ public class WebConfig extends WebMvcConfigurationSupport {
 	protected void addInterceptors(InterceptorRegistry registry) {
 		
 		registry.addInterceptor(new InterceptadorDeAcessos()).addPathPatterns("/**");
-		
 	}
 }

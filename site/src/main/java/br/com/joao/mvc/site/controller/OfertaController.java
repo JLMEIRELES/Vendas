@@ -3,6 +3,8 @@ package br.com.joao.mvc.site.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -84,6 +86,7 @@ public class OfertaController {
 			
 			oferta.setStatus(StatusOferta.ACEITA);
 			ofertaRepository.save(oferta);
+			ofertaRepository.deletaPorId(idOferta);
 			
 			Long idPedido = oferta.getPedido().getId();
 			Pedido pedido = pedidoRepository.encontraPorId(idPedido);
@@ -127,6 +130,38 @@ public class OfertaController {
 		return "oferta/ofertasEnviadas";
 		
 	}
+	
+
+	@Transactional
+	@GetMapping("deletaOferta/{idOferta}")
+	public String DeleteOffer(@PathVariable(value = "idOferta") Long idOferta) {
+		
+		ofertaRepository.deletaPorId(idOferta);
+	
+		return "redirect:/oferta/ofertasEnviadas";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

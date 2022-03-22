@@ -2,6 +2,7 @@ package br.com.joao.mvc.site.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -30,4 +31,7 @@ public interface OfertaRepository extends CrudRepository<Oferta, Long> {
 	@Query(value = "SELECT * FROM ofertas WHERE usuario_username = :name AND status = :status", nativeQuery = true)
 	List<Oferta> findByUsuarioAndStatus(String name, String status);
 	
+	@Modifying
+	@Query(value = "DELETE FROM ofertas WHERE id = :id", nativeQuery = true)
+	void deletaPorId(Long id);
 }

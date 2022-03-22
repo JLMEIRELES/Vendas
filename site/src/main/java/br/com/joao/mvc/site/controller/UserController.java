@@ -4,7 +4,6 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -73,7 +72,7 @@ public class UserController {
 		Sort sort = Sort.by("id");
 		PageRequest paginacao = PageRequest.of(0, 10, sort);
 		List<Pedido> todosPedidos = pedidoRepository.findByStatusAndUser(status.toUpperCase(), principal.getName());
-		List<Pedido> pedidos = pedidoRepository.findByStatusAndUserPageable(status.toUpperCase(), principal.getName(), paginacao);
+		List<Pedido> pedidos = pedidoRepository.findByStatusAndUser(status.toUpperCase(), principal.getName());
 		
 		int totalPaginas = todosPedidos.size()/2 + 1;
 		

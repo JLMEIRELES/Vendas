@@ -1,83 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head th:replace="~{base :: head}"></head>
-	<body>
-	
+<body>
+
 	<div th:replace="~{base :: logo}"></div>
-	
-		<div class= "container">
-			
-			<div th:replace="~{base :: titulo('Minhas Ofertas')}"></div>
-			
-			<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
-				
-				<div class="navbar-nav px-4">
-					<a th:classappend= "${status} == null ? 'active' "class = "nav-item nav-link pd-3" th:href="@{/oferta/ofertasEnviadas}">Todos</a>
-					<a th:classappend= "${status} == 'aguardando' ? 'active' " class = "nav-item nav-link " th:href="@{/oferta/ofertasEnviadas/aguardando}">Aguardando</a>
-					<a th:classappend= "${status} == 'aprovado' ? 'active' " class = "nav-item nav-link " th:href="@{/oferta/ofertasEnviadas/aceita}">Aceitas</a>
-					<a th:classappend= "${status} == 'entregue' ? 'active' " class = "nav-item nav-link " th:href="@{/oferta/ofertasEnviadas/rejeitada}">Rejeitadas</a>
+
+	<div class="container">
+
+		<div th:replace="~{base :: titulo('Minhas Ofertas')}"></div>
+
+		<nav
+			class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
+
+			<div class="navbar-nav px-4">
+				<a th:classappend="${status} == null ? 'active' "
+					class="nav-item nav-link pd-3" th:href="@{/oferta/ofertasEnviadas}">Todos</a>
+				<a th:classappend="${status} == 'aguardando' ? 'active' "
+					class="nav-item nav-link "
+					th:href="@{/oferta/ofertasEnviadas/aguardando}">Aguardando</a> <a
+					th:classappend="${status} == 'aprovado' ? 'active' "
+					class="nav-item nav-link "
+					th:href="@{/oferta/ofertasEnviadas/aceita}">Aceitas</a> <a
+					th:classappend="${status} == 'entregue' ? 'active' "
+					class="nav-item nav-link "
+					th:href="@{/oferta/ofertasEnviadas/rejeitada}">Rejeitadas</a>
+			</div>
+
+
+		</nav>
+
+		<div class="card mb-4 mt-4" th:each="oferta: ${minhasOfertas}">
+
+
+			<div class="card-header alert-primary "
+				th:text="${oferta.pedido.nome}">Nome do Produto</div>
+
+
+
+			<div class="card-body">
+				<div class="row">
+					<div class="col-12 col-sm-8">
+						<div class="row">
+							<div class="col-md-5">
+								Valor: <span th:if="${oferta.valor} != null"
+									th:text="${'R$ ' + #numbers.formatDecimal(oferta.valor, 3, 'POINT', 2, 'COMMA')}">200.99</span>
+							</div>
+							<div class="col-md-7">
+								Data da entrega: <span
+									th:text="${#temporals.format(oferta.dataEntrega, 'dd/MM/yyyy')}">10/02/2020</span>
+							</div>
+						</div>
+
+
+
+
+						<div class="mt-3 mb-3">Coment�rio</div>
+
+						<div>
+							<textarea disabled="disabled" class="form-control disabled"
+								th:text="${oferta.comentario}">coment�rio</textarea>
+						</div>
+					</div>
+
+					<div class="col-12 col-sm-4 mt-3">
+						<div>
+							<img class="img-thumbnail " th:src="${oferta.pedido.urlImagem}"
+								src="" />
+						</div>
+
+
+
+					</div>
+
+
 				</div>
-				
-		
-			</nav>
-			
-			<div class="card mb-4 mt-4" th:each="oferta: ${minhasOfertas}">
-				
-				
-				<div class="card-header alert-primary " th:text="${oferta.pedido.nome}">Nome do Produto</div>
-			
-				
-				
-				<div class= "card-body">
-					<div class="row">
-						<div class="col-12 col-sm-8">
-							<div class="row">
-								<div class="col-md-5">Valor: <span th:if="${oferta.valor} != null" th:text="${'R$ ' + #numbers.formatDecimal(oferta.valor, 3, 'POINT', 2, 'COMMA')}">200.99</span></div>
-								<div class ="col-md-7" >Data da entrega: <span th:text="${#temporals.format(oferta.dataEntrega, 'dd/MM/yyyy')}">10/02/2020</span></div>
-							</div>
-							
-							<div class="mt-3 mb-3">Descrição</div>
-							
-							<div>	
-								<textarea  disabled="disabled" class="form-control disabled" th:text="${oferta.pedido.descricao}">coment�rio</textarea>
-							</div>
-		
-							
-							<div class="mt-3 mb-3"> Comentário</div>
-							
-							<div>	
-								<textarea  disabled="disabled" class="form-control disabled" th:text="${oferta.comentario}">coment�rio</textarea>
-							</div>
-						</div>
-					
-						<div class = "col-12 col-sm-4 mt-3">
-							<div >
-								<img class="img-thumbnail " th:src="${oferta.pedido.urlImagem}" src=""/>
-							</div>
-							
-							
-							
-						</div>
+				<div class="d-flex">
+
+					<form th:if="${oferta.status.name()} =='AGUARDANDO'"
+						class="card-body ">
+						<button disabled="disable" class="btn btn-warning" type="submit">Aguardando
+							Resposta</button>
+					</form>
+
+					<form th:if="${oferta.status.name()} =='AGUARDANDO'"class="card-body "th:action="@{/oferta/deletaOferta/{idOferta}(idOferta = ${oferta.id})}">
+						<button class="btn btn-danger" type="submit">Excluir
+							Oferta</button>
 						
-						
-					</div>
-					<div class="d-flex">
-						<form th:if="${oferta.status.name()} =='AGUARDANDO'" class="card-body "  th:action="@{/oferta/aceitaOferta/{idOferta}(idOferta = ${oferta.id})}" method="PUT">
-							<button  disabled = "disable" class="btn btn-warning"  type="submit">Aguardando Reposta</button>
-							
-						</form>
-						
-						<form th:if="${oferta.status.name()} == 'REJEITADA'" class="card-body" >
-							<button disabled = "disable" class="btn btn-danger"  type="submit" >Oferta Rejeitada!</button>
-						</form>
-						
-						<form th:if="${oferta.status.name()} == 'ACEITA'" class="card-body" >
-							<button disabled = "disable" class="btn btn-success"  type="submit" >Oferta Aceita!</button>
-						</form>
-						
-					</div>
+					</form>
+
+					<form th:if="${oferta.status.name()} == 'REJEITADA'"
+						class="card-body">
+						<button disabled="disable" class="btn btn-danger" type="submit">Oferta
+							Rejeitada!</button>
+					</form>
+
+					<form th:if="${oferta.status.name()} == 'ACEITA'" class="card-body">
+						<button disabled="disable" class="btn btn-success" type="submit">Oferta
+							Aceita!</button>
+					</form>
+
 				</div>
 			</div>
 		</div>
-	</body>
+	</div>
+	
+</body>
 </html>

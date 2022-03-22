@@ -1,14 +1,12 @@
 package br.com.joao.mvc.site.api;
 
 import java.security.Principal;
-
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +26,9 @@ public class OfertaRest {
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	
+
+	
 	
 	@PostMapping
 	public Oferta createOffer(@Valid @RequestBody
@@ -50,6 +51,8 @@ public class OfertaRest {
 		
 		return novaOferta;
 	}
+	
+
 	
 	
 	

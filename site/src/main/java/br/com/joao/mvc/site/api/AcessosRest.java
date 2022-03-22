@@ -2,7 +2,6 @@ package br.com.joao.mvc.site.api;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +12,6 @@ import br.com.joao.mvc.site.interceptor.InterceptadorDeAcessos.Acesso;
 @RestController
 public class AcessosRest {
 	
-	@GetMapping
 	public List<Acesso> getAcessos(){	
 		return InterceptadorDeAcessos.acessos;
 	}

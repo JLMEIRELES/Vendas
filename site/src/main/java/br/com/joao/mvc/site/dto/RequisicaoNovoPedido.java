@@ -6,16 +6,16 @@ import br.com.joao.mvc.site.model.Pedido;
 import br.com.joao.mvc.site.model.StatusPedido;
 
 public class RequisicaoNovoPedido {
+
+	@NotBlank //NotBlank.requisicaoNovoPedido.nomeProduto=não pode estar em branco
+	private String nomeProduto;
 	
 	@NotBlank
-	String nomeProduto;
-	@NotBlank
-	String urlProduto;
-	@NotBlank
-	String urlImagem;
-	@NotBlank
-	String descricaoProduto;
+	private String urlProduto;
 	
+	@NotBlank
+	private String urlImagem;
+	private String descricao;
 	
 	public String getNomeProduto() {
 		return nomeProduto;
@@ -35,30 +35,21 @@ public class RequisicaoNovoPedido {
 	public void setUrlImagem(String urlImagem) {
 		this.urlImagem = urlImagem;
 	}
-	public String getDescricaoProduto() {
-		return descricaoProduto;
+	public String getDescricao() {
+		return descricao;
 	}
-	public void setDescricaoProduto(String descricaoProduto) {
-		this.descricaoProduto = descricaoProduto;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-	
 	public Pedido toPedido() {
-		
 		Pedido pedido = new Pedido();
-		
-		pedido.setDescricao(descricaoProduto);
-		
-		pedido.setUrlImagem(urlImagem);
-		
+		pedido.setDescricao(descricao);
 		pedido.setNome(nomeProduto);
-		
+		pedido.setUrlImagem(urlImagem);
 		pedido.setUrlProduto(urlProduto);
-		
 		pedido.setStatus(StatusPedido.AGUARDANDO);
-		
 		return pedido;
 	}
-	
 	
 	
 }

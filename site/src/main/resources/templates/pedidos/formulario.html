@@ -11,7 +11,7 @@
 	</div>
 		<div class= "container">
 			
-			<div th:replace="~{base :: titulo('Novo Produto')}"></div>
+			<div th:replace="~{base :: titulo('Novo Pedido')}"></div>
 			<div class="card mt-3">
 			
 				<form th:object="${requisicaoNovoPedido}" class="card-body" th:action="@{/pedidos/novo}" method="POST">		
