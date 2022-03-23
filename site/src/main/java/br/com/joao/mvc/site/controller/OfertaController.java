@@ -86,7 +86,6 @@ public class OfertaController {
 			
 			oferta.setStatus(StatusOferta.ACEITA);
 			ofertaRepository.save(oferta);
-			ofertaRepository.deletaPorId(idOferta);
 			
 			Long idPedido = oferta.getPedido().getId();
 			Pedido pedido = pedidoRepository.encontraPorId(idPedido);

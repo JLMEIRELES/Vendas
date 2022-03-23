@@ -6,6 +6,7 @@ encoding//src/main/resources/templates/cadastro.html=UTF-8
 encoding//src/main/resources/templates/home.html=UTF-8
 encoding//src/main/resources/templates/login.html=UTF-8
 encoding//src/main/resources/templates/oferta/home.html=UTF-8
+encoding//src/main/resources/templates/oferta/ofertasEnviadas.html=UTF-8
 encoding//src/main/resources/templates/oferta/ofertasRecebidas.html=UTF-8
 encoding//src/main/resources/templates/pedidos/formulario.html=UTF-8
 encoding//src/main/resources/templates/usuario/home.html=UTF-8
